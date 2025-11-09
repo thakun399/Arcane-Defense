@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 600
-  lifetime: 2
+  lifetime: 5
   hitSound: {fileID: 8300000, guid: ce7288fa3b0693741a759c512f2dfe06, type: 3}
 --- !u!50 &-8610714943449731683
 Rigidbody2D:

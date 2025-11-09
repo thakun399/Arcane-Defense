@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerVision : MonoBehaviour
 {
     [Header("Vision Settings")]
-    public float visionRadius = 5f;        // ระยะการมองเห็น
+    public float Range = 5f;        // ระยะการมองเห็น
     public SpriteRenderer fogSprite;       // Sprite ของ FogOverlay
 
     private Material fogMat;
@@ -22,7 +22,7 @@ public class PlayerVision : MonoBehaviour
             fogMat.SetVector("_PlayerPos", new Vector4(transform.position.x, transform.position.y, 0, 0));
 
             // ส่ง visionRadius ล่าสุดให้ Shader
-            fogMat.SetFloat("_Radius", visionRadius);
+            fogMat.SetFloat("_Radius", Range);
         }
     }
 
@@ -30,6 +30,6 @@ public class PlayerVision : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0, 1, 0, 0.3f);
-        Gizmos.DrawSphere(transform.position, visionRadius);
+        Gizmos.DrawSphere(transform.position, Range);
     }
 }

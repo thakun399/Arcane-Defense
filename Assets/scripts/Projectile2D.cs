@@ -6,7 +6,7 @@ public class Projectile2D : MonoBehaviour
     [SerializeField] GameObject target; 
     [SerializeField] Rigidbody2D bulletPrefab;
 
-    [SerializeField] float cooldownTime = 1f; 
+    [SerializeField] float SpeedAttack = 1f; 
     private float nextFireTime = 0f; 
     
     [SerializeField] AudioClip shootSound;//กั้ง
@@ -22,7 +22,7 @@ public class Projectile2D : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
         {
             
-            nextFireTime = Time.time + cooldownTime;
+            nextFireTime = Time.time + SpeedAttack;
 
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

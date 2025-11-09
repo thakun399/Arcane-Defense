@@ -1,12 +1,11 @@
 using UnityEngine;
-
 public class Projectile2D : MonoBehaviour
 {
     [SerializeField] Transform shootPoint;
     [SerializeField] GameObject target; 
     [SerializeField] Rigidbody2D bulletPrefab;
 
-    [SerializeField] float SpeedAttack = 1f; 
+    public float SpeedAttack = 1f; 
     private float nextFireTime = 0f; 
     
     [SerializeField] AudioClip shootSound;//กั้ง
@@ -22,7 +21,7 @@ public class Projectile2D : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
         {
             
-            nextFireTime = Time.time + SpeedAttack;
+            nextFireTime = Time.time +SpeedAttack;
 
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -66,3 +65,4 @@ public class Projectile2D : MonoBehaviour
     }
     
 }
+

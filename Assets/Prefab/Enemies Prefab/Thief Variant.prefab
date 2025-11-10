@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  maxHealth: 20
+  maxHealth: 270
   scoreValue: 5
   hitBaseSound: {fileID: 8300000, guid: 579e4b9fbd13a834d8a0cf7ed2ccd181, type: 3}
 --- !u!114 &7580002595603074008
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7383348db55bc7449a9838a7b4708a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 0.5
 --- !u!50 &6442029373220261512
 Rigidbody2D:
   serializedVersion: 5

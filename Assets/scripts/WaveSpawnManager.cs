@@ -6,16 +6,18 @@ public class WaveSpawnManager : MonoBehaviour
 {
     public Wave[] waveConfigurations;
     public WaveController waveController;
-
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI countdownText;
-
     public bool enableWaveCycling;
+
+    [Header("Card System")]
+    public CardSelectionManager cardSelectionManager; // << เพิ่มตรงนี้
 
     private int currentWave = 0;
     private float waveEndTime = 0f;
     private bool waitingForNextWave = false;
     private bool showingWaveLabel = false;
+    private bool showingCardSelection = false;
 
     private GameManager gameManager;
 
@@ -41,9 +43,7 @@ public class WaveSpawnManager : MonoBehaviour
                 if (currentWave >= waveConfigurations.Length)
                 {
                     if (enableWaveCycling)
-                    {
                         currentWave = 0;
-                    }
                     else
                     {
                         enabled = false;
@@ -55,17 +55,17 @@ public class WaveSpawnManager : MonoBehaviour
             }
         }
 
-        if (waveController.AllEnemiesDead() && !waitingForNextWave && !showingWaveLabel)
+        // เมื่อศัตรูในเวฟตายหมด
+        if (waveController.AllEnemiesDead() && !waitingForNextWave && !showingWaveLabel && !showingCardSelection)
         {
-            if (currentWave == waveConfigurations.Length - 1)
+            showingCardSelection = true;
+            cardSelectionManager.ShowCardSelection(() =>
             {
-                gameManager.WinGame();
-                enabled = false;
-                return;
-            }
-
-            waveEndTime = Time.time + waveConfigurations[currentWave].waveInterval;
-            waitingForNextWave = true;
+                // เมื่อเลือกการ์ดเสร็จ
+                showingCardSelection = false;
+                waveEndTime = Time.time + waveConfigurations[currentWave].waveInterval;
+                waitingForNextWave = true;
+            });
         }
     }
 

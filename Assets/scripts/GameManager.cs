@@ -10,19 +10,20 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Elements")]
     public GameObject gameOverUI;
-    public GameObject victoryUI;  
+    public GameObject victoryUI;
     public TMP_Text finalScoreText;
     public TMP_Text victoryScoreText;
-    
-    
-    [Header("Audio")]//กั้ง
+
+    [Header("Audio")]
     public AudioClip monsterDeathSound;
+    public AudioClip gameOverSound;
+    public AudioClip victorySound;
+    public AudioClip backgroundMusic;
+
     private AudioSource audioSource;
-    public AudioClip gameOverSound; //  เพิ่มเสียงตอนแพ้
-    public AudioClip victorySound; // เพิ่มเสียงตอนชนะ
-    public AudioClip backgroundMusic; // เพลงพื้นหลัง
-    private AudioSource musicSource;  // AudioSource สำหรับเพลงพื้นหลัง
-    [Range(0f, 1f)] public float musicVolume = 0.5f;  // ควบคุม
+    private AudioSource musicSource;
+
+    [Range(0f, 1f)] public float musicVolume = 0.5f;
 
     [Header("Score")]
     public int score = 0;
@@ -30,6 +31,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Win Condition")]
     public int scoreToWin = 2000;
+
+    [Header("Player & Enemy References")]
+    public PlayerStats playerStats; // <== เพิ่มช่องนี้ไว้โยง Player
+    public EnemyManager enemyManager; // <== ใช้สำหรับอัปเดตค่า Enemy ทั้งหมด
 
     void Awake()
     {
@@ -40,39 +45,36 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UpdateScoreText();
-        victoryUI.SetActive(false);  
-        gameOverUI.SetActive(false);  
-        audioSource = GetComponent<AudioSource>();//กั้ง
-        // สร้าง AudioSource สำหรับเพลงพื้นหลัง
+        victoryUI.SetActive(false);
+        gameOverUI.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
+
+        // จัดการเพลงพื้นหลัง
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource.clip = backgroundMusic;
-        musicSource.loop = true;  // ทำให้เพลงเล่นวน
-        musicSource.volume = musicVolume;  // ตั้งค่าความดังของเพลง
-        musicSource.Play();  // เริ่มเพลงพื้นหลัง
+        musicSource.loop = true;
+        musicSource.volume = musicVolume;
+        musicSource.Play();
     }
 
     public void GameOver()
     {
         if (isGameOver) return;
-
         isGameOver = true;
         Time.timeScale = 0f;
-      
+
         if (musicSource != null)
             musicSource.Stop();
 
-        
-       
         if (gameOverSound != null && audioSource != null)
-        {
             audioSource.PlayOneShot(gameOverSound);
-        }
 
         if (gameOverUI != null)
-            gameOverUI.SetActive(true);  
+            gameOverUI.SetActive(true);
+
         if (finalScoreText != null)
             finalScoreText.text = "Final Score: " + score.ToString();
-        
 
         Debug.Log("Game Over!");
     }
@@ -80,23 +82,20 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         if (isGameOver) return;
-
         isGameOver = true;
         Time.timeScale = 0f;
-     
+
         if (musicSource != null)
             musicSource.Stop();
-       
+
         if (victorySound != null && audioSource != null)
-        {
             audioSource.PlayOneShot(victorySound);
-        }
 
         if (victoryUI != null)
-            victoryUI.SetActive(true); 
+            victoryUI.SetActive(true);
 
         if (victoryScoreText != null)
-            victoryScoreText.text = "\nFinal Score: " + score.ToString();  
+            victoryScoreText.text = "\nFinal Score: " + score.ToString();
 
         Debug.Log("You Win!");
     }
@@ -111,7 +110,6 @@ public class GameManager : MonoBehaviour
     {
         score += value;
         UpdateScoreText();
-        
     }
 
     void UpdateScoreText()
@@ -119,11 +117,44 @@ public class GameManager : MonoBehaviour
         if (scoreText != null)
             scoreText.text = "Score: " + score.ToString();
     }
-    public void PlayMonsterDeathSound()//กั้ง
+
+    public void PlayMonsterDeathSound()
     {
         if (monsterDeathSound != null && audioSource != null)
-        {
             audioSource.PlayOneShot(monsterDeathSound);
+    }
+
+    // =====================================================
+    // 🎴 ฟังก์ชันใหม่: ใช้ปรับ Buff/Debuff จากการ์ด
+    // =====================================================
+    public void ApplyBuffs(CardEffect[] effects)
+    {
+        foreach (var effect in effects)
+        {
+            if (effect.target == TargetType.Player && playerStats != null)
+            {
+                switch (effect.stat)
+                {
+                    case StatType.DMG:
+                        playerStats.Damage += effect.isPercentage ?
+                            playerStats.Damage * (effect.value / 100f) : effect.value;
+                        break;
+
+                    case StatType.SpeedAttack:
+                        playerStats.SpeedAttack += playerStats.SpeedAttack * (effect.value / 100f);
+                        break;
+
+                    case StatType.Range:
+                        playerStats.Range += playerStats.Range * (effect.value / 100f);
+                        break;
+                }
+            }
+            else if (effect.target == TargetType.Enemies && enemyManager != null)
+            {
+                enemyManager.ApplyEnemyBuff(effect);
+            }
         }
+
+        Debug.Log("Buffs applied from selected card!");
     }
 }

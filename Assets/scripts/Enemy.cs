@@ -3,8 +3,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int damage = 1;
-    public int maxHealth = 40;
-    private int currentHealth;
+    public float maxHealth = 40;
+    private float currentHealth;
+    public float speed = 10f;
 
     public int scoreValue = 10;
     private GameManager GameManager;
@@ -20,7 +21,10 @@ public class Enemy : MonoBehaviour
         GameManager = FindObjectOfType<GameManager>();
 
     }
-    
+    void Update()
+    {
+        transform.Translate(Vector2.left * speed*Time.deltaTime);
+    }
    
     public void TakeDamage(int amount)
     {

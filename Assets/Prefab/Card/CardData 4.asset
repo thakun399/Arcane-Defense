@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CardData 4
   m_EditorClassIdentifier: Assembly-CSharp::CardModifier
   cardName: Power Shot
-  description: DMG +20%
+  description: 4
   cardImage: {fileID: 0}
   weight: 0.7
   effects:

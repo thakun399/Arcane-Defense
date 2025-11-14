@@ -22,8 +22,8 @@ MonoBehaviour:
   - target: 0
     stat: 1
     value: 50
-    isPercentage: 1
+    isPercentage: 0
   - target: 0
     stat: 2
     value: 20
-    isPercentage: 1
+    isPercentage: 0

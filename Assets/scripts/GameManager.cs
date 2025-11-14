@@ -33,8 +33,16 @@ public class GameManager : MonoBehaviour
     public int scoreToWin = 2000;
 
     [Header("Player & Enemy References")]
-    public PlayerStats playerStats; // <== เพิ่มช่องนี้ไว้โยง Player
-    public EnemyManager enemyManager; // <== ใช้สำหรับอัปเดตค่า Enemy ทั้งหมด
+    public PlayerStats playerStats;
+    public EnemyManager enemyManager;
+
+    // =============================================
+    // ⭐ NEW: Enemy multipliers (ตรงกับชื่อที่คุณใช้)
+    // =============================================
+    [Header("Enemy Multipliers (from Cards)")]
+    public float enemyHpMultiplier = 1f;
+    public float enemySpeedMultiplier = 1f;
+    public float enemyScoreMultiplier = 1f;
 
     void Awake()
     {
@@ -50,7 +58,7 @@ public class GameManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
-        // จัดการเพลงพื้นหลัง
+        // background music
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource.clip = backgroundMusic;
         musicSource.loop = true;
@@ -75,8 +83,6 @@ public class GameManager : MonoBehaviour
 
         if (finalScoreText != null)
             finalScoreText.text = "Final Score: " + score.ToString();
-
-        Debug.Log("Game Over!");
     }
 
     public void WinGame()
@@ -96,8 +102,6 @@ public class GameManager : MonoBehaviour
 
         if (victoryScoreText != null)
             victoryScoreText.text = "\nFinal Score: " + score.ToString();
-
-        Debug.Log("You Win!");
     }
 
     public void RestartGame()
@@ -125,7 +129,7 @@ public class GameManager : MonoBehaviour
     }
 
     // =====================================================
-    // 🎴 ฟังก์ชันใหม่: ใช้ปรับ Buff/Debuff จากการ์ด
+    // 🎴 Apply Buffs from Cards
     // =====================================================
     public void ApplyBuffs(CardEffect[] effects)
     {
@@ -148,13 +152,30 @@ public class GameManager : MonoBehaviour
                         break;
                 }
             }
-            else if (effect.target == TargetType.Enemies && enemyManager != null)
+            else if (effect.target == TargetType.Enemies)
             {
-                enemyManager.ApplyEnemyBuff(effect);
+                // Update multipliers
+                switch (effect.stat)
+                {
+                    case StatType.HP:
+                        enemyHpMultiplier *= 1f + (effect.value / 100f);
+                        break;
+
+                    case StatType.Speed:
+                        enemySpeedMultiplier *= 1f + (effect.value / 100f);
+                        break;
+
+                    case StatType.ScoreValue:
+                        enemyScoreMultiplier *= 1f + (effect.value / 100f);
+                        break;
+
+                    case StatType.DMG:
+                        enemyManager.ApplyEnemyBuff(effect);
+                        break;
+                }
             }
         }
 
         Debug.Log("Buffs applied from selected card!");
     }
-
 }

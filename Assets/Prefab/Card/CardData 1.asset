@@ -18,6 +18,6 @@ MonoBehaviour:
   weight: 3.33
   effects:
   - target: 1
-    stat: 4
+    stat: 3
     value: 200
     isPercentage: 1

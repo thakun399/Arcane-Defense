@@ -40,7 +40,7 @@ public class Projectile2D : MonoBehaviour
                 Rigidbody2D shootBulletRb = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
 
                 // เซ็ตความเร็ว
-                shootBulletRb.velocity = projectileVelocity;
+                shootBulletRb.linearVelocity = projectileVelocity;
 
                 // ถ้า prefab มาพร้อมกับ Bullet component ให้เซ็ต damage จาก playerStats
                 Bullet bulletComp = shootBulletRb.GetComponent<Bullet>();

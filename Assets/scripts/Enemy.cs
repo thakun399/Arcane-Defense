@@ -21,7 +21,15 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.Instance;
-        EnemyManager.Instance.RegisterEnemy(this); // ลงทะเบียน
+
+        // ⭐ Load multipliers
+        maxHealth *= gameManager.enemyHpMultiplier;
+        speed *= gameManager.enemySpeedMultiplier;
+        scoreValue = Mathf.RoundToInt(scoreValue * gameManager.enemyScoreMultiplier);
+
+        currentHealth = maxHealth;
+
+        EnemyManager.Instance.RegisterEnemy(this);
     }
 
     void Update()
@@ -40,8 +48,8 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        OnEnemyDead?.Invoke(this);       // แจ้งให้ WaveController/Manager
-        EnemyManager.Instance.UnregisterEnemy(this); // ลบออกจาก list
+        OnEnemyDead?.Invoke(this);
+        EnemyManager.Instance.UnregisterEnemy(this);
 
         if (gameManager != null)
         {

@@ -48,7 +48,7 @@ public class PlayerStats : MonoBehaviour
                 Vector2 targetPos = hit.point;
                 Rigidbody2D shootBullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
                 Vector2 velocity = CalculateProjectileVelocity(shootPoint.position, targetPos, 1f);
-                shootBullet.velocity = velocity;
+                shootBullet.linearVelocity = velocity;
 
                 Bullet bullet = shootBullet.GetComponent<Bullet>();
                 if (bullet != null)

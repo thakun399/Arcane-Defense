@@ -24,31 +24,15 @@ public class EnemyManager : MonoBehaviour
             activeEnemies.Remove(e);
     }
 
+    // ใช้เฉพาะ DMG เพราะ stat อื่นให้ Enemy อ่านจาก multipliers ตอน Spawn
     public void ApplyEnemyBuff(CardEffect effect)
     {
         foreach (var enemy in activeEnemies)
         {
-            switch (effect.stat)
+            if (effect.stat == StatType.DMG)
             {
-                case StatType.HP:
-                    enemy.maxHealth += enemy.maxHealth * (effect.value / 100f);
-                    break;
-
-                case StatType.Speed:
-                    enemy.speed += enemy.speed * (effect.value / 100f);
-                    break;
-
-                case StatType.ScoreValue:
-                    // ✅ แปลง float → int ป้องกัน error
-                    enemy.scoreValue += Mathf.RoundToInt(enemy.scoreValue * (effect.value / 100f));
-                    break;
-
-                case StatType.DMG:
-                    // ถ้า enemy.Damage เป็น int → ใช้ Mathf.RoundToInt
-                    enemy.damage += Mathf.RoundToInt(effect.value);
-                    break;
+                enemy.damage += Mathf.RoundToInt(effect.value);
             }
         }
     }
-
 }

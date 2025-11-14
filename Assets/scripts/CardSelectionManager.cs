@@ -6,7 +6,7 @@ public class CardSelectionManager : MonoBehaviour
 {
     [Header("Card UI Elements")]
     public GameObject cardSelectionPanel;
-    public CardUI[] cardSlots; // 3 ใบใน UI
+    public CardUI[] cardSlots;
 
     [Header("Card Pool")]
     public List<CardData> availableCards;
@@ -18,7 +18,7 @@ public class CardSelectionManager : MonoBehaviour
         onComplete = onCompleteCallback;
         cardSelectionPanel.SetActive(true);
 
-        List<CardData> randomCards = GetRandomCards(3);
+        List<CardData> randomCards = GetRandomUniqueCards(3);
 
         for (int i = 0; i < cardSlots.Length; i++)
         {
@@ -36,29 +36,33 @@ public class CardSelectionManager : MonoBehaviour
         onComplete?.Invoke();
     }
 
-    private List<CardData> GetRandomCards(int count)
+    private List<CardData> GetRandomUniqueCards(int count)
     {
-        List<CardData> result = new List<CardData>();
-        float totalWeight = 0f;
-        foreach (var c in availableCards) totalWeight += c.weight;
+        List<CardData> cards = new List<CardData>();
+        List<CardData> pool = new List<CardData>(availableCards);
 
         for (int i = 0; i < count; i++)
         {
+            if (pool.Count == 0) break;
+
+            float totalWeight = 0;
+            foreach (var c in pool) totalWeight += c.weight;
+
             float rand = UnityEngine.Random.Range(0, totalWeight);
             float cumulative = 0f;
 
-            foreach (var card in availableCards)
+            for (int j = 0; j < pool.Count; j++)
             {
-                cumulative += card.weight;
+                cumulative += pool[j].weight;
                 if (rand <= cumulative)
                 {
-                    result.Add(card);
+                    cards.Add(pool[j]);
+                    pool.RemoveAt(j); // ❗ลบออก ป้องกันซ้ำ
                     break;
                 }
             }
         }
 
-        return result;
+        return cards;
     }
 }
-

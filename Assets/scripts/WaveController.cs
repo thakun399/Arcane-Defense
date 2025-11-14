@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+
 public class WaveController : MonoBehaviour
 {
     public Transform[] spawnPoints;
@@ -7,21 +8,12 @@ public class WaveController : MonoBehaviour
     private Wave currentWave;
     private int enemiesSpawned = 0;
     private float nextSpawnTime = 0f;
-    
-    private List<GameObject> aliveEnemies = new List<GameObject>(); 
+    private List<GameObject> aliveEnemies = new List<GameObject>();
 
     public bool AllEnemiesDead()
     {
-        if (currentWave == null) return false; 
-
         aliveEnemies.RemoveAll(e => e == null);
-        return enemiesSpawned >= currentWave.enemyCount && aliveEnemies.Count == 0;
-    }
-
-
-    public bool IsComplete()
-    {
-        return enemiesSpawned >= currentWave?.enemyCount;
+        return currentWave != null && enemiesSpawned >= currentWave.enemyCount && aliveEnemies.Count == 0;
     }
 
     public void StartWave(Wave wave)
@@ -29,7 +21,7 @@ public class WaveController : MonoBehaviour
         currentWave = wave;
         enemiesSpawned = 0;
         nextSpawnTime = Time.time;
-        aliveEnemies = new List<GameObject>(); 
+        aliveEnemies.Clear();
     }
 
     void Update()
@@ -49,13 +41,13 @@ public class WaveController : MonoBehaviour
         int enemyIndex = Random.Range(0, currentWave.enemyPrefabs.Length);
         int spawnIndex = Random.Range(0, spawnPoints.Length);
 
-        GameObject enemy = Instantiate(
-            currentWave.enemyPrefabs[enemyIndex],
-            spawnPoints[spawnIndex].position,
-            spawnPoints[spawnIndex].rotation
-        );
-
+        GameObject enemy = Instantiate(currentWave.enemyPrefabs[enemyIndex], spawnPoints[spawnIndex].position, spawnPoints[spawnIndex].rotation);
         aliveEnemies.Add(enemy);
-    }
 
+        Enemy eComp = enemy.GetComponent<Enemy>();
+        if (eComp != null)
+        {
+            eComp.OnEnemyDead += (enemyObj) => aliveEnemies.Remove(enemy);
+        }
+    }
 }

@@ -13,8 +13,17 @@ MonoBehaviour:
   m_Name: CardData 2
   m_EditorClassIdentifier: Assembly-CSharp::CardModifier
   cardName: Power Shot
-  description: "\u0E40\u0E1E\u0E34\u0E48\u0E21 DMG \u0E02\u0E2D\u0E07\u0E1C\u0E39\u0E49\u0E40\u0E25\u0E48\u0E19
-    20%"
+  description: 'Range +20%
+
+    DMG 15%'
   cardImage: {fileID: 0}
-  weight: 1
-  effects: []
+  weight: 3.2
+  effects:
+  - target: 0
+    stat: 2
+    value: 20
+    isPercentage: 1
+  - target: 0
+    stat: 0
+    value: 15
+    isPercentage: 1

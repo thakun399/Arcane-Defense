@@ -1,42 +1,33 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class PlayerStatsUI : MonoBehaviour
 {
-    [Header("Player References")]
-    public PlayerVision playerVision;
-    public Projectile2D playerProjectile;
-    public Bullet bulletPrefab; // ใช้เพื่อดึงค่า damage
+    public PlayerStats playerStats;
 
-    [Header("UI Elements")]
     public TMP_Text dmgText;
     public TMP_Text speedText;
     public TMP_Text rangeText;
 
-    public Image dmgIcon;
-    public Image speedIcon;
-    public Image rangeIcon;
-
-    void Start()
-    {
-        UpdateUI();
-    }
-
     void Update()
     {
-        UpdateUI();
+        if (playerStats != null)
+        {
+            playerStats.OnStatsChanged += UpdateUI;
+            UpdateUI(); // แสดงค่าครั้งแรก
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (playerStats != null)
+            playerStats.OnStatsChanged -= UpdateUI;
     }
 
     void UpdateUI()
     {
-        if (bulletPrefab != null && dmgText != null)
-            dmgText.text = $"DMG: {bulletPrefab.damage}";
-
-        if (playerProjectile != null && speedText != null)
-            speedText.text = $"Speed: {playerProjectile.SpeedAttack:F2}";
-
-        if (playerVision != null && rangeText != null)
-            rangeText.text = $"Range: {playerVision.Range:F1}";
+        dmgText.text = $"DMG: {playerStats.Damage:F1}";
+        speedText.text = $"Speed: {playerStats.SpeedAttack:F2}";
+        rangeText.text = $"Range: {playerStats.Range:F1}";
     }
 }

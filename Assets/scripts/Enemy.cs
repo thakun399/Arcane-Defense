@@ -6,10 +6,12 @@ public class Enemy : MonoBehaviour
     public float maxHealth = 40;
     private float currentHealth;
     public float speed = 10f;
-
     public int scoreValue = 10;
-    private GameManager GameManager;
     public AudioClip hitBaseSound;
+
+    private GameManager gameManager;
+
+    public System.Action<Enemy> OnEnemyDead;
 
     void Awake()
     {
@@ -18,38 +20,34 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        GameManager = FindObjectOfType<GameManager>();
-
+        gameManager = GameManager.Instance;
+        EnemyManager.Instance.RegisterEnemy(this); // ลงทะเบียน
     }
+
     void Update()
     {
-        transform.Translate(Vector2.left * speed*Time.deltaTime);
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
-   
+
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-        Debug.Log($"{gameObject.name} took {amount} damage! Remaining: {currentHealth}");
-
         if (currentHealth <= 0)
         {
             Die();
         }
     }
 
-
     private void Die()
     {
-        Debug.Log($"{gameObject.name} died!");
+        OnEnemyDead?.Invoke(this);       // แจ้งให้ WaveController/Manager
+        EnemyManager.Instance.UnregisterEnemy(this); // ลบออกจาก list
 
-
-        if (GameManager != null)
+        if (gameManager != null)
         {
-            GameManager.AddScore(scoreValue);
-
-            GameManager.PlayMonsterDeathSound();
+            gameManager.AddScore(scoreValue);
+            gameManager.PlayMonsterDeathSound();
         }
-
 
         Destroy(gameObject);
     }
@@ -59,19 +57,12 @@ public class Enemy : MonoBehaviour
         if (collision.CompareTag("Tower"))
         {
             Tower tower = collision.GetComponent<Tower>();
-            if (tower != null)
-            {
-                tower.TakeDamage(damage);
-            }
+            if (tower != null) tower.TakeDamage(damage);
 
             if (hitBaseSound != null)
-            {
                 AudioSource.PlayClipAtPoint(hitBaseSound, transform.position, 2.5f);
-            }
 
-            Destroy(gameObject);
+            Die();
         }
     }
-    
-
 }

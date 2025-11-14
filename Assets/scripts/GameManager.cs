@@ -136,16 +136,15 @@ public class GameManager : MonoBehaviour
                 switch (effect.stat)
                 {
                     case StatType.DMG:
-                        playerStats.Damage += effect.isPercentage ?
-                            playerStats.Damage * (effect.value / 100f) : effect.value;
+                        playerStats.AddDamage(effect.value, effect.isPercentage);
                         break;
 
                     case StatType.SpeedAttack:
-                        playerStats.SpeedAttack += playerStats.SpeedAttack * (effect.value / 100f);
+                        playerStats.AddSpeedAttack(effect.value, effect.isPercentage);
                         break;
 
                     case StatType.Range:
-                        playerStats.Range += playerStats.Range * (effect.value / 100f);
+                        playerStats.AddRange(effect.value, effect.isPercentage);
                         break;
                 }
             }
@@ -157,4 +156,5 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Buffs applied from selected card!");
     }
+
 }

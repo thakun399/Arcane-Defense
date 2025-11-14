@@ -113,9 +113,6 @@ PrefabInstance:
       addedObject: {fileID: 1749099553910409616}
     - targetCorrespondingSourceObject: {fileID: 1000010755293042, guid: 978fa2fb617654f5eaeff9da6fc7d116, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8102243599225483481}
-    - targetCorrespondingSourceObject: {fileID: 1000010755293042, guid: 978fa2fb617654f5eaeff9da6fc7d116, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1660820919172654059}
     - targetCorrespondingSourceObject: {fileID: 1000010755293042, guid: 978fa2fb617654f5eaeff9da6fc7d116, type: 3}
       insertIndex: -1
@@ -133,7 +130,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851897322096147432}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b14ead162642a67428b5da182df403ba, type: 3}
   m_Name: 
@@ -143,19 +140,6 @@ MonoBehaviour:
   speed: 0.2
   scoreValue: 15
   hitBaseSound: {fileID: 8300000, guid: 579e4b9fbd13a834d8a0cf7ed2ccd181, type: 3}
---- !u!114 &8102243599225483481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 851897322096147432}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7383348db55bc7449a9838a7b4708a60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.2
 --- !u!50 &1660820919172654059
 Rigidbody2D:
   serializedVersion: 5

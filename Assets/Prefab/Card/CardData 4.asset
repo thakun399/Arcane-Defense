@@ -10,20 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a09ae84041d074bb26b0a2dd507287, type: 3}
-  m_Name: CardData
+  m_Name: CardData 4
   m_EditorClassIdentifier: Assembly-CSharp::CardModifier
-  cardName: 
-  description: 'SPA -50%
-
-    Range + 20%'
+  cardName: Power Shot
+  description: DMG +20%
   cardImage: {fileID: 0}
-  weight: 3.33
+  weight: 0.7
   effects:
   - target: 0
     stat: 1
-    value: 50
-    isPercentage: 1
-  - target: 0
-    stat: 2
-    value: 20
+    value: 80
     isPercentage: 1

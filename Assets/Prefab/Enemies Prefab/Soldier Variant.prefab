@@ -109,9 +109,6 @@ PrefabInstance:
       addedObject: {fileID: 6202573618614471259}
     - targetCorrespondingSourceObject: {fileID: 1000011742669328, guid: 315058484cf2044ce8dcb608b4678ff6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9012488043030185653}
-    - targetCorrespondingSourceObject: {fileID: 1000011742669328, guid: 315058484cf2044ce8dcb608b4678ff6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3612444650182820872}
     - targetCorrespondingSourceObject: {fileID: 1000011742669328, guid: 315058484cf2044ce8dcb608b4678ff6, type: 3}
       insertIndex: -1
@@ -139,19 +136,6 @@ MonoBehaviour:
   speed: 0.3
   scoreValue: 50
   hitBaseSound: {fileID: 8300000, guid: 579e4b9fbd13a834d8a0cf7ed2ccd181, type: 3}
---- !u!114 &9012488043030185653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113248228996434536}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7383348db55bc7449a9838a7b4708a60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.3
 --- !u!60 &3612444650182820872
 PolygonCollider2D:
   m_ObjectHideFlags: 0

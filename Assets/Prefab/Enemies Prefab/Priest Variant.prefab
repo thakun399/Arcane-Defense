@@ -109,9 +109,6 @@ PrefabInstance:
       addedObject: {fileID: 4478172357728331512}
     - targetCorrespondingSourceObject: {fileID: 1000013034572668, guid: 389c7e1a1dabb4e1e917001420b89c9a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1695892864853714286}
-    - targetCorrespondingSourceObject: {fileID: 1000013034572668, guid: 389c7e1a1dabb4e1e917001420b89c9a, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6439923009459349294}
     - targetCorrespondingSourceObject: {fileID: 1000013034572668, guid: 389c7e1a1dabb4e1e917001420b89c9a, type: 3}
       insertIndex: -1
@@ -139,19 +136,6 @@ MonoBehaviour:
   speed: 1
   scoreValue: 10
   hitBaseSound: {fileID: 8300000, guid: 579e4b9fbd13a834d8a0cf7ed2ccd181, type: 3}
---- !u!114 &1695892864853714286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3514304246070288469}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7383348db55bc7449a9838a7b4708a60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
 --- !u!50 &6439923009459349294
 Rigidbody2D:
   serializedVersion: 5

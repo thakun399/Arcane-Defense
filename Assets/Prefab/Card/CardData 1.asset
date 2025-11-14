@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a09ae84041d074bb26b0a2dd507287, type: 3}
   m_Name: CardData 1
   m_EditorClassIdentifier: Assembly-CSharp::CardModifier
-  cardName: Power Shot
-  description: DMG +20%
+  cardName: 
+  description: Enemies Speed + 100%
   cardImage: {fileID: 0}
-  weight: 3.2
+  weight: 3.33
   effects:
-  - target: 0
-    stat: 0
-    value: 20
+  - target: 1
+    stat: 4
+    value: 200
     isPercentage: 1

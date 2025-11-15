@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a09ae84041d074bb26b0a2dd507287, type: 3}
-  m_Name: CardData 2
+  m_Name: CardData 8
   m_EditorClassIdentifier: Assembly-CSharp::CardModifier
-  cardName: B
-  description: 'Buff Speed Attack +15%
-
-    Debuff HP Enemies +10%'
+  cardName: H
+  description: "Buff DMG +25%\r\nDebuff Range \u221215%"
   cardImage: {fileID: 0}
   weight: 3.33
   effects:
   - target: 0
-    stat: 1
-    value: 15
+    stat: 0
+    value: 25
     isPercentage: 1
-  - target: 1
-    stat: 3
-    value: 10
+  - target: 0
+    stat: 2
+    value: -15
     isPercentage: 1

@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a09ae84041d074bb26b0a2dd507287, type: 3}
   m_Name: CardData 1
   m_EditorClassIdentifier: Assembly-CSharp::CardModifier
-  cardName: 
-  description: Enemies Speed + 100%
+  cardName: A
+  description: 'Buff DMG +20%
+
+    Debuff Speed Enemies +10% '
   cardImage: {fileID: 0}
   weight: 3.33
   effects:
+  - target: 0
+    stat: 0
+    value: 20
+    isPercentage: 1
   - target: 1
-    stat: 3
-    value: 200
+    stat: 4
+    value: 10
     isPercentage: 1

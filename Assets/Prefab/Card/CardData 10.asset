@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9a09ae84041d074bb26b0a2dd507287, type: 3}
-  m_Name: CardData
+  m_Name: CardData 10
   m_EditorClassIdentifier: Assembly-CSharp::CardModifier
-  cardName: 
-  description: 'SPA -50%
+  cardName: L
+  description: 'Buff Range +30%
 
-    Range + 20%'
+    Debuff Speed Enemies '
   cardImage: {fileID: 0}
   weight: 3.33
   effects:
   - target: 0
-    stat: 1
-    value: 50
-    isPercentage: 0
-  - target: 0
     stat: 2
+    value: 30
+    isPercentage: 1
+  - target: 1
+    stat: 4
     value: 20
-    isPercentage: 0
+    isPercentage: 1

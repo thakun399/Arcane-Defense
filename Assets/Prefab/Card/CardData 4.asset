@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a09ae84041d074bb26b0a2dd507287, type: 3}
   m_Name: CardData 4
   m_EditorClassIdentifier: Assembly-CSharp::CardModifier
-  cardName: Power Shot
-  description: 4
+  cardName: D
+  description: "Buff Score Enemies +20%\r\nDebuff DMG \u221210%"
   cardImage: {fileID: 0}
   weight: 0.7
   effects:
+  - target: 1
+    stat: 5
+    value: 20
+    isPercentage: 1
   - target: 0
-    stat: 1
-    value: 80
+    stat: 0
+    value: 10
     isPercentage: 1
